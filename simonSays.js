@@ -3,32 +3,43 @@ $(document).ready(function() {
     var isHardMode = false;
     var isGameOver = false;
     var isPlayersTurn = false;
-    var patternArray = [1, 2];
+    var patternArray = [];
     var numUserGuesses = 0;
+    var roundsWon = 0;
 
-    // handlers
+    // check user guesses
     $('.game-btns').click(function() {
         if (isPlayersTurn) {
-            console.log($(this).attr('data-lightup'), patternArray[numUserGuesses])
+            console.log($(this).attr('data-lightup'), patternArray[numUserGuesses]);
             var selectedColor = $(this).attr('data-lightup');
 
             if (selectedColor !== patternArray[numUserGuesses].toString()) {
+
                 // if any wrong guess before getting to end of sequence end game
                 resetGame();
+                $('#score').append($('<h2>').html('GAME OVER'));
+                $('#start').html('Play Again?');
                 return;
             }
 
             numUserGuesses++
+            $('#correct').html('Number of Correct Guesses: ' + numUserGuesses);
 
             if (numUserGuesses === patternArray.length) {
 
                 // if click happens and we're at end of array user guessed correct pattern
+                console.log('correct...');
                 patternArray.push(generateRandomNumber());
                 numUserGuesses = 0;
+                roundsWon++;
+                $('#rounds').html('Number of Correct Rounds: ' + roundsWon);
+                isPlayersTurn = false;
                 highlightPattern();
             }
         }
     });
+
+    // start the game
     $('button').click(function() {
         if (!isGameInProgress) {
             isGameInProgress = true;
@@ -37,12 +48,14 @@ $(document).ready(function() {
     });
 
     function init() {
-        var countdownInterval, countDown = 1;
-        var currPatternLength = $('<h2>').html('Pattern Length: ' + patternArray.length);
-        var numCorrectGuesses = $('<h2>').html('Number of Correct Guesses: ' + numUserGuesses);
+        var countdownInterval, countDown = 3;
+        var currPatternLength = $('<h2 id="length">').html('Pattern Length: ' + patternArray.length);
+        var numCorrectGuesses = $('<h2 id="correct">').html('Number of Correct Guesses: ' + numUserGuesses);
+        var numCorrectRounds = $('<h2 id="rounds">').html('Number of Correct Rounds: ' + roundsWon);
         var gameStartsIn = $('<h2 id="countdown">').html('Game Starts In: ' + countDown);
 
-        $('#score').append(currPatternLength, numCorrectGuesses, gameStartsIn);
+        $('#score').empty();
+        $('#score').append(currPatternLength, numCorrectGuesses, numCorrectRounds, gameStartsIn);
 
         // start a countdown so player knows when game will start
         countdownInterval = setInterval(function() {
@@ -77,8 +90,10 @@ $(document).ready(function() {
     }
 
     function highlightPattern() {
-        var i = 0;
-        var interval = setInterval(function() {
+        var interval, i = 0;
+        $('#length').html('Pattern Length: ' + patternArray.length);
+        $('#correct').html('Number of Correct Guesses: ' + numUserGuesses);
+        interval = setInterval(function() {
             var currColor = $('[data-lightup=' + patternArray[i] + ']').css('opacity', '1.0');
             window.setTimeout(function() {
                 currColor.css('opacity', '0.6');
@@ -94,6 +109,13 @@ $(document).ready(function() {
 
     function resetGame() {
         console.log('game over...');
+        isGameInProgress = false;
+        isHardMode = false;
+        isGameOver = false;
+        isPlayersTurn = false;
+        patternArray = [];
+        numUserGuesses = 0;
+        roundsWon = 0;
     }
 
 });
