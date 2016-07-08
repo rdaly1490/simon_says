@@ -13,6 +13,9 @@ $(document).ready(function() {
             console.log($(this).attr('data-lightup'), patternArray[numUserGuesses]);
             var selectedColor = $(this).attr('data-lightup');
 
+            // light up color here
+            lightUpSection(selectedColor, 200);
+
             if (selectedColor !== patternArray[numUserGuesses].toString()) {
 
                 // if any wrong guess before getting to end of sequence end game
@@ -93,11 +96,10 @@ $(document).ready(function() {
         var interval, i = 0;
         $('#length').html('Pattern Length: ' + patternArray.length);
         $('#correct').html('Number of Correct Guesses: ' + numUserGuesses);
+
         interval = setInterval(function() {
-            var currColor = $('[data-lightup=' + patternArray[i] + ']').css('opacity', '1.0');
-            window.setTimeout(function() {
-                currColor.css('opacity', '0.6');
-            }, 700);
+            // light up the current array value's corresponding section
+            lightUpSection(patternArray[i], 700);
 
             i++;
             if (i >= patternArray.length) {
@@ -118,6 +120,12 @@ $(document).ready(function() {
         roundsWon = 0;
     }
 
+    function lightUpSection(section, interval) {
+        var currColor = $('[data-lightup=' + section + ']').css('opacity', '1.0');
+        window.setTimeout(function() {
+            currColor.css('opacity', '0.6');
+        }, interval);
+    }
 });
 
 
