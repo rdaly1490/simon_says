@@ -1,0 +1,71 @@
+#container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+#simon-game {
+    align-self: center;
+    background: #fff;
+    position: relative;
+    float: left;
+    margin-right: 3em;
+    width: 302px;
+    height: 295px;
+    margin-bottom: 20px;
+}
+
+.game-btns {
+    text-indent: -10000px; /*get rid of bullets, or use list-style: none; */
+    border-radius: 150px 150px 150px 150px;
+    position: absolute;
+    height: 290px;
+    opacity: 0.6;
+    padding: 0;
+    margin: 0;
+    border: 5px solid black;
+}
+
+#blue {
+    background: dodgerblue;
+    clip: rect(0px, 150px, 150px, 0px);
+    width: 300px;
+}
+
+#red {
+    background: #FF5643;
+    clip: rect(0px, 315px, 150px, 150px);
+    width: 296px;
+}
+
+#green {
+    background: #BEDE15;
+    clip: rect(150px, 315px, 315px, 150px);
+    width: 296px;
+}
+
+#yellow {
+    background: #FEEF33;
+    clip: rect(150px, 150px, 315px, 0px);
+    width: 300px;
+}
+
+#btn-container {
+    align-self: center;
+    text-align: center;
+    width: 350px;
+    border: 2px solid black;
+    border-radius: 5%;
+    margin-left: 20px;
+}
+
+#btn-container button {
+    margin: 0 auto;
+}
+
+#score {
+    height:200px;
+    width: 100%;
+    background-color: blue;
+}
