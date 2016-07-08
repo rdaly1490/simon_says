@@ -1,16 +1,21 @@
+// global to allow setting var from console
+var isHardMode = false;
+
 $(document).ready(function() {
     var isGameInProgress = false;
-    var isHardMode = false;
     var isGameOver = false;
     var isPlayersTurn = false;
     var patternArray = [];
     var numUserGuesses = 0;
     var roundsWon = 0;
 
+    // intentional console logs for players
+    console.log('%cHey There! %c', 'color: green; font-weight: bold; font-size: 20px', 'font-size: 30px');
+    console.log('%cLooking for a challenge? Try changing the difficulty --> setDifficulty()', 'font-weight: bold; font-size: 12px');
+
     // check user guesses
     $('.game-btns').click(function() {
         if (isPlayersTurn) {
-            console.log($(this).attr('data-lightup'), patternArray[numUserGuesses]);
             var selectedColor = $(this).attr('data-lightup');
 
             // light up color here
@@ -31,7 +36,6 @@ $(document).ready(function() {
             if (numUserGuesses === patternArray.length) {
 
                 // if click happens and we're at end of array user guessed correct pattern
-                console.log('correct...');
                 patternArray.push(generateRandomNumber());
                 numUserGuesses = 0;
                 roundsWon++;
@@ -52,10 +56,10 @@ $(document).ready(function() {
 
     function init() {
         var countdownInterval, countDown = 3;
-        var currPatternLength = $('<h2 id="length">').html('Pattern Length: ' + patternArray.length);
-        var numCorrectGuesses = $('<h2 id="correct">').html('Number of Correct Guesses: ' + numUserGuesses);
-        var numCorrectRounds = $('<h2 id="rounds">').html('Number of Correct Rounds: ' + roundsWon);
-        var gameStartsIn = $('<h2 id="countdown">').html('Game Starts In: ' + countDown);
+        var currPatternLength = $('<h4 id="length">').html('Pattern Length: ' + patternArray.length);
+        var numCorrectGuesses = $('<h4 id="correct">').html('Number of Correct Guesses: ' + numUserGuesses);
+        var numCorrectRounds = $('<h4 id="rounds">').html('Number of Correct Rounds: ' + roundsWon);
+        var gameStartsIn = $('<h4 id="countdown">').html('Game Starts In: ' + countDown);
 
         $('#score').empty();
         $('#score').append(currPatternLength, numCorrectGuesses, numCorrectRounds, gameStartsIn);
@@ -74,8 +78,11 @@ $(document).ready(function() {
     }
 
     function startGame() {
-        console.log('game starting...');
-        startRound();
+        if (isGameOver) {
+            resetGame();
+        } else {
+            highlightPattern();
+        }
     }
 
     function generateRandomNumber() {
@@ -84,33 +91,29 @@ $(document).ready(function() {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function startRound() {
-        if (isGameOver) {
-            resetGame();
-        } else {
-            highlightPattern();
-        }
-    }
-
     function highlightPattern() {
-        var interval, i = 0;
+        var interval, i = 0, lightUpInterval = 700, outerInterval = 1000;
         $('#length').html('Pattern Length: ' + patternArray.length);
         $('#correct').html('Number of Correct Guesses: ' + numUserGuesses);
 
+        if (isHardMode) {
+            lightUpInterval = 200;
+            outerInterval = 400;
+        }
+
         interval = setInterval(function() {
             // light up the current array value's corresponding section
-            lightUpSection(patternArray[i], 700);
+            lightUpSection(patternArray[i], lightUpInterval);
 
             i++;
             if (i >= patternArray.length) {
                 clearInterval(interval);
                 isPlayersTurn = true;
             }
-        }, 1000);
+        }, outerInterval);
     }
 
     function resetGame() {
-        console.log('game over...');
         isGameInProgress = false;
         isHardMode = false;
         isGameOver = false;
@@ -127,6 +130,20 @@ $(document).ready(function() {
         }, interval);
     }
 });
+
+// easter egg function to access from console
+function setDifficulty(diff) {
+    switch (diff.toLowerCase()) {
+        case 'hard':
+            isHardMode = true;
+            break;
+        case 'normal':
+            isHardMode = false;
+            break;
+        default:
+            console.log('Please enter either string "normal" or "hard"');
+    }
+}
 
 
 
