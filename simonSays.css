@@ -85,6 +85,11 @@
 
 /*/////////// code stuff ////////////////*/
 
+#code {
+    width: 90%;
+    margin: 0 auto;
+}
+
 #tabs {
 
    width: 100%;
