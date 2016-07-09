@@ -1,16 +1,24 @@
+body {
+    text-align: center;
+    padding-top: 20px;
+    background-color: #F5F5F5;
+}
+
+#title {
+    color: #65C6BB;
+}
+
 #container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding: 50px 5px;
     width: 90%;
-    background-color: #e5e5e5;
-    margin: 50px auto;
+    margin: 0px 50px auto;
 }
 
 #simon-game {
     align-self: center;
-    background-color: #e5e5e5;
     position: relative;
     float: left;
     margin-right: 3em;
@@ -31,19 +39,19 @@
 }
 
 #blue {
-    background: dodgerblue;
+    background: blue;
     clip: rect(0px, 150px, 150px, 0px);
     width: 300px;
 }
 
 #red {
-    background: #FF5643;
+    background: red;
     clip: rect(0px, 315px, 150px, 150px);
     width: 296px;
 }
 
 #green {
-    background: #BEDE15;
+    background: green;
     clip: rect(150px, 315px, 315px, 150px);
     width: 296px;
 }
@@ -58,7 +66,8 @@
     align-self: center;
     text-align: center;
     width: 350px;
-    border: 2px solid black;
+    border: 2px solid #795548;
+    color: #65C6BB;
     border-radius: 5%;
     margin-left: 20px;
 }
@@ -70,7 +79,8 @@
     width: 100px;
     height: 30px;
     border-radius: 5px;
-    background-color: green;
+    border: none;
+    background-color: #795548;
 }
 
 #btn-container button:focus {
@@ -80,6 +90,7 @@
 #score {
     height:180px;
     width: 100%;
+    color: #795548;
 }
 
 

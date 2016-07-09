@@ -48,6 +48,7 @@ $(document).ready(function() {
 
     // start the game
     $('button').click(function() {
+        $('#start').html('');
         if (!isGameInProgress) {
             isGameInProgress = true;
             init();
