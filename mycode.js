@@ -39,7 +39,6 @@ $('#tabs li a').click(function(){
 	    $(this).removeClass('inactive');
 	    
 	    $('.tab-container').hide();
-	    console.log($('.'+ clickedId))
 	    $('.'+ clickedId).fadeIn('slow');
 	}
 });
