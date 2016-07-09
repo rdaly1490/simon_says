@@ -2,6 +2,7 @@
 <html>
 <head>
     <title></title>
+    <link href="./prism/prism.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="./simonSays.css">
 </head>
 <body>
@@ -20,7 +21,19 @@
             <button>Start</button>
         </div>
     </div>
+    <div id="code">
+        <ul id="tabs">
+            <li><a id="js">JS</a></li>
+            <li><a id="css">CSS</a></li>
+            <li><a id="html">HTML</a></li>
+        </ul>
+        <pre class="tab-container js"><code class="language-javascript"></code></pre>
+        <pre class="tab-container css"><code class="language-css"></code></pre>
+        <pre class="tab-container html"><code class="language-markdown"></code></pre>
+    </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="./prism/prism.js"></script>
+<script src="./mycode.js"></script>
 <script src="./simonSays.js"></script>
 </body>
 </html>
