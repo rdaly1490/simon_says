@@ -8,7 +8,16 @@ var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456
 
 
 for (var fileExtension in prismKey) {
-	var url = 'https://api.github.com/repos/rdaly1490/simon_says/contents/simonSays.' + fileExtension;
+
+	var fileName;
+
+	if (fileExtension === 'html') {
+		fileName = 'index.' + fileExtension;
+	} else {
+		fileName = 'simonSays.' + fileExtension;
+	}
+
+	var url = 'https://api.github.com/repos/rdaly1490/simon_says/contents/' + fileName;
 
 	// async issues where by time callbacks executed last value of fileExtension is used for all functions
 	// wrapping in IIFE solves this by passing in value of fileExtension at time of call
